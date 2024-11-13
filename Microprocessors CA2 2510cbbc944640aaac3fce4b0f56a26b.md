@@ -334,44 +334,48 @@ PFA                EQU 0x40025038	; 	3 colours
 
 1. Initiate sampling in ADCPSSI
     
-    ```nasm
+```nasm
+Loop
     ADC0_PSSI_R			EQU 0x40038028
     
     LDR R1, =ADC0_PSSI_R      
     MOV R0, #0x08					; initiate sampling in the SS3  (Sample Sequencer)
     STR R0, [R1]    
-    ```
+```
     
 2. Check raw interrupt status in ADCRIS
     
-    ```nasm
+```nasm
     ADC0_RIS_R			EQU	0x40038004		; Raw interrupt status - set to 1 when conversion completed by SS
     
-    LDR R1, =ADC0_RIS_R   			; R1 = address of ADC Raw Interrupt Status (This register stores the interrupt status, which updates to 1 whenever a sample has completed conversion)
-    LDR R0, [R1]           			; check end of a conversion
-    CMP	R0, #0x08    				    ; when a sample has completed conversion -> a raw interrupt is enabled
-    BNE	Loop
-    ```
+    LDR R1, =ADC0_RIS_R ; R1 = address of ADC Raw Interrupt Status 
+                        ; ADC0_RIS_R updates to 1 whenever conversion completes
+    LDR R0, [R1]        ; check end of a conversion
+    CMP	R0, #0x08    	; when a sample has completed conversion -> a raw interrupt is enabled
+    BNE	Loop            ; if conversion not complete, go back to B Loop
+```
     
 3. If true, load result from ADCSSFIFO1 into memory
     
-    ```nasm
+```nasm
     ADC0_SSFIFO3_R		EQU	0x400380A8		; Data FIFO - cleared from buffer once read
     
     LDR R1, =ADC0_SSFIFO3_R			; load SS3 result FIFO into R1
     LDR R0,[R1]
     LDR R2, =Result					; store data
     STR R0,[R2]
-    ```
+```
     
 4. Clear interrupt status from ADCISC
     
-    ```nasm
+```nasm
     ADC0_ISC_R			EQU	0x4003800C	
     
     LDR R1, =ADC0_ISC_R
     LDR R0, [R1]
     ORR R0, R0, #08					; acknowledge conversion by clearing the interrupt status
     STR R0, [R1]
-    ```
+    
+    ; continue code here using [Result]
+```
 
