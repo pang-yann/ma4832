@@ -1,25 +1,24 @@
 # Microprocessors: CA2
 ## GPIO Pins and Alternate Functions
 
-![image.png](image.png)
-
-![image.png](c08c6fa5-1f12-4568-a05f-adf51b727998.png)
-
-![image.png](image%201.png)
+![gpio_af_table_0.png](gpio_af_table_0.png)
+![gpio_af_table_1.png](gpio_af_table_1.png)
+![gpio_af_table_2.png](gpio_af_table_2.png)
 
 ## Register Map
 
-| **GPIO Port A (APB)** | 0x4000.4000 |
+| Port | Address |
 | --- | --- |
-| **GPIO Port B (APB)** | 0x4000.5000 |
-| **GPIO Port C (APB)** | 0x4000.6000 |
-| **GPIO Port D (APB)** | 0x4000.7000 |
-| **GPIO Port E (APB)** | 0x4002.4000 |
-| **GPIO Port F (APB)** | 0x4002.5000 |
+| GPIO Port B (APB) | 0x4000.5000 |
+| GPIO Port A (APB) | 0x4000.4000 |
+| GPIO Port C (APB) | 0x4000.6000 |
+| GPIO Port D (APB) | 0x4000.7000 |
+| GPIO Port E (APB) | 0x4002.4000 |
+| GPIO Port F (APB) | 0x4002.5000 |
 
 ### GPIO Alternate Function Select (GPIOAFSEL), offset 0x420
 
-![image.png](image%202.png)
+![GPIO_AFSEL.png](gpio_afsel.png)
 
 ### GPIO Digital Enable (GPIODEN), offset 0x51C
 
@@ -27,25 +26,23 @@
 
 The GPIODEN register is the digital enable register. By default, all GPIO signals except those listed below are configured out of reset to be undriven (tristate). Their digital function is disabled; they do not drive a logic value on the pin and they do not allow the pin voltage into the GPIO receiver. To use the pin as a digital input or output (either GPIO or alternate function), the corresponding GPIODEN bit must be set.
 
-</aside>
-
-![image.png](image%203.png)
+![gpio_den.png](gpio_den.png)
 
 ### GPIO Analog Mode Select (GPIOAMSEL), offset 0x528
 
-![image.png](image%204.png)
+![gpio_amsel.png](gpio_amsel.png)
 
 ### GPIO Port Control (GPIOPCTL), offset 0x52C
 
-![image.png](image%205.png)
+![gpio_pctl.png](gpio_pctl.png)
 
 ## GPIO Direction (GPIODIR), offset 0x400
 
-![image.png](image%206.png)
+![gpio_dir.png](gpio_dir.png)
 
 ## GPIO Pull-Up Select (GPIOPUR), offset 0x510
 
-![image.png](image%207.png)
+![gpio_pur.png](gpio_pur.png)
 
 ## Steps (Digital Input/Output)
 
@@ -377,3 +374,4 @@ PFA                EQU 0x40025038	; 	3 colours
     ORR R0, R0, #08					; acknowledge conversion by clearing the interrupt status
     STR R0, [R1]
     ```
+
