@@ -23,9 +23,6 @@
 
 ### GPIO Digital Enable (GPIODEN), offset 0x51C
 
-<aside>
-💡
-
 *Note: Pins configured as digital inputs are Schmitt-triggered.*
 
 The GPIODEN register is the digital enable register. By default, all GPIO signals except those listed below are configured out of reset to be undriven (tristate). Their digital function is disabled; they do not drive a logic value on the pin and they do not allow the pin voltage into the GPIO receiver. To use the pin as a digital input or output (either GPIO or alternate function), the corresponding GPIODEN bit must be set.
@@ -139,19 +136,21 @@ The GPIODEN register is the digital enable register. By default, all GPIO signal
 
 ---
 
-<aside>
-💡
-
 The following GPIO pins control the onboard LEDs and switches.
 
 PF0                EQU 0x40025004	; 	SW2 - negative logic
+
 PF1                EQU 0x40025008	;	RED LED
+
 PF2                EQU 0x40025010	; 	BLUE LED - ORIG
+
 PF3                EQU 0x40025020	;	GREEN LED
+
 PF4                EQU 0x40025040	;	SW1 - ORIG -negative logic
+
 PFA                EQU 0x40025038	; 	3 colours
 
-</aside>
+---
 
 ## GPIO : Analog Pin
 
